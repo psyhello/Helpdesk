@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class IssueController extends Controller
      */
     public function index()
     {
-        //
+        $issues =Issue::All();
+
+        return view('issues.index',compact('issues'));
     }
 
     /**
@@ -24,7 +31,7 @@ class IssueController extends Controller
      */
     public function create()
     {
-        //
+        return view('issues.create');
     }
 
     /**
@@ -33,9 +40,13 @@ class IssueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$user)
     {
-        //
+        $attr = request()->validate(['description'=>'required']);
+
+        Issue::create($attr + ['user_id'=>auth()->id()]);
+
+        return view('issues.index');
     }
 
     /**
