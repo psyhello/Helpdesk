@@ -66,6 +66,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </div>
                         </div>
                     </form>
