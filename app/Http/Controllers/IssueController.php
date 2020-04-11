@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Issue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class IssueController extends Controller
 {
@@ -44,17 +45,11 @@ class IssueController extends Controller
     public function store(Request $request)
     {
        
-
-        //var_dump($request->input('description'));
-        //var_dump(Auth::id());
-
-
         $attr = request()->validate(['description'=>'required']);
 
         Issue::create($attr + ['user_id'=>Auth::id()]);
-
         
-        return view('issues.index');
+        return view('issues.my');
     }
 
     /**
@@ -100,5 +95,12 @@ class IssueController extends Controller
     public function destroy(Issue $issue)
     {
         //
+    }
+
+    public function ShowUsersIssues(User $user)
+    {
+        $userIssues = Issue::where('user_id',Auth::id())->get();
+
+        return view ('issues.my',compact('userIssues'));
     }
 }

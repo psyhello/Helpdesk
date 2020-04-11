@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Issue;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,14 @@ Route::get('/', function () {
 
 Route::get('/id', function(){
 
-	$user = Auth::id();
-	return $user;
+	$userIssues = Issue::where('user_id',Auth::id())->get();
+	return $userIssues;
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route:: get('/issues/my', 'IssueController@ShowUsersIssues');
 
 Route::resource('issues','IssueController');

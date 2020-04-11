@@ -16,7 +16,7 @@
 
                     You are logged in!
                     <hr>
-                    <a href="issues"><button type="button" class="btn btn-primary">My issues</button></a>
+                    <a href="issues/my"><button type="button" class="btn btn-primary">My issues</button></a>
                     <a href="issues/create"><button type="button" class="btn btn-success">Create an issue</button></a>
                 </div>
             </div>
