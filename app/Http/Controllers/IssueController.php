@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Issue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IssueController extends Controller
 {
@@ -19,7 +20,7 @@ class IssueController extends Controller
      */
     public function index()
     {
-        $issues =Issue::All();
+        $issues = Issue::All();
 
         return view('issues.index',compact('issues'));
     }
@@ -40,12 +41,19 @@ class IssueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$user)
+    public function store(Request $request)
     {
+       
+
+        //var_dump($request->input('description'));
+        //var_dump(Auth::id());
+
+
         $attr = request()->validate(['description'=>'required']);
 
-        Issue::create($attr + ['user_id'=>auth()->id()]);
+        Issue::create($attr + ['user_id'=>Auth::id()]);
 
+        
         return view('issues.index');
     }
 

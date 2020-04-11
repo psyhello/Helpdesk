@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,12 @@ Route::get('/', function () {
 	else{
 		return view('auth.register');
 	}
-	
-    
+});
+
+Route::get('/id', function(){
+
+	$user = Auth::id();
+	return $user;
 });
 
 Auth::routes();
